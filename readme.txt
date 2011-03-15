@@ -1,10 +1,10 @@
-=== DirtySuds - Embed PDF ===
-Contributors: pathawks
+=== Embed PDF ===
+Contributors: dirtysuds, pathawks
 Donate link: http://www.pathawks.com/p/wordpress-plugins.html
-Tags: plugins, wordpress, embed, eombed, pdf, google, Google Docs
-Requires at least: 3.0
+Tags: plugins, wordpress, embed, eombed, pdf, google, Google Docs, shortcode
+Requires at least: 2.9
 Tested up to: 3.1
-Stable tag: 1.01
+Stable tag: 1.02
 
 Adds pseudo oembed support for PDF documents
 
@@ -28,10 +28,13 @@ Supported attributes in the embed tag are `class` `id` `title` `height` and `wid
 = I have an idea for a great way to improve this plugin =
 
 Great! I'd love to hear from you.
-postlist@pathawks.com
+embedPDF@pathawks.com
 
 
 == Changelog ==
+
+= 1.02 =
+* Added support for `gdoc` shortcode for compatibility with older plugins
 
 = 1.01 =
 * Added support for `class` and `id` attributes (Thanks, _Robert_)

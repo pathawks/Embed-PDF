@@ -4,10 +4,11 @@ Plugin Name: DirtySuds - Embed PDF
 Plugin URI: http://dirtysuds.com
 Description: Embed a PDF using Google Docs Viewer
 Author: Pat Hawks
-Version: 1.01
+Version: 1.02
 Author URI: http://www.pathawks.com
 
 Updates:
+1.02 20110315 - Added support for `gdoc` shortcode
 1.01 20110303 - Added support for class and ID attributes
 1.00 20110224 - First Version
 
@@ -28,9 +29,11 @@ Updates:
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-wp_embed_register_handler( 'pdf', '#(^(http|wpurl)\:\/\/.+\.pdf$)#i', 'wp_embed_handler_pdf' );
+wp_embed_register_handler( 'pdf', '#(^(http|wpurl)\:\/\/.+\.pdf$)#i', 'dirtysuds_embed_pdf' );
+add_shortcode( 'gdoc', 'dirtysuds_embed_pdf' );
+add_filter('plugin_row_meta', 'dirtysuds_embed_pdf_rate',10,2);
 
-function wp_embed_handler_pdf( $matches, $atts, $url, $rawattr ) {
+function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	extract( shortcode_atts( array(
 		'height' => get_option('embed_size_h'),
 		'width' => get_option('embed_size_w'),
@@ -42,6 +45,19 @@ function wp_embed_handler_pdf( $matches, $atts, $url, $rawattr ) {
 	), $atts ) );
 
 	$url = str_replace('wpurl://',get_bloginfo('wpurl').'/',$url);
+	
+	if (!strstr($url,'http://') && strstr($atts,'http://')) {
+		$url = $atts;
+		extract( shortcode_atts( array(
+			'height' => get_option('embed_size_h'),
+			'width' => get_option('embed_size_w'),
+			'border' => '',
+			'style' => '',
+			'title' => '',
+			'class' => 'pdf',
+			'id' => '',
+		), $matches ) );
+	}
 
 	$embed = '<iframe src="http://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" style="height:'.$height.'px;width:'.$width.'px;" class="'.$class.'"';
 	if ($id) {
@@ -59,4 +75,11 @@ function wp_embed_handler_pdf( $matches, $atts, $url, $rawattr ) {
 	$embed .= '></iframe>';
 
 	return apply_filters( 'embed_pdf', $embed, $matches, $attr, $url, $rawattr  );
+}
+
+function dirtysuds_embed_pdf_rate($links,$file) {
+		if (plugin_basename(__FILE__) == $file) {
+			$links[] = '<a href="http://wordpress.org/extend/plugins/dirtysuds-embed-pdf/">Rate this plugin</a>';
+		}
+	return $links;
 }
