@@ -3,11 +3,12 @@
 Plugin Name: DirtySuds - Embed PDF
 Plugin URI: http://dirtysuds.com
 Description: Embed a PDF using Google Docs Viewer
-Author: Pat Hawks
-Version: 1.02
-Author URI: http://www.pathawks.com
+Author: Dirty Suds
+Version: 1.03
+Author URI: http://blog.dirtysuds.com
 
 Updates:
+1.03 20110321 - Automatically enable auto-embeds on activation
 1.02 20110315 - Added support for `gdoc` shortcode
 1.01 20110303 - Added support for class and ID attributes
 1.00 20110224 - First Version
@@ -29,9 +30,15 @@ Updates:
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+
+register_activation_hook( __FILE__, 'dirtysuds_embed_pdf_enable_embeds' );
 wp_embed_register_handler( 'pdf', '#(^(http|wpurl)\:\/\/.+\.pdf$)#i', 'dirtysuds_embed_pdf' );
 add_shortcode( 'gdoc', 'dirtysuds_embed_pdf' );
 add_filter('plugin_row_meta', 'dirtysuds_embed_pdf_rate',10,2);
+
+function dirtysuds_embed_pdf_enable_embeds() {
+	update_option('embed_autourls',1);
+}
 
 function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	extract( shortcode_atts( array(

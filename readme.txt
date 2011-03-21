@@ -4,7 +4,7 @@ Donate link: http://www.pathawks.com/p/wordpress-plugins.html
 Tags: plugins, wordpress, embed, eombed, pdf, google, Google Docs, shortcode
 Requires at least: 2.9
 Tested up to: 3.1
-Stable tag: 1.02
+Stable tag: 1.03
 
 Adds pseudo oembed support for PDF documents
 
@@ -32,6 +32,9 @@ embedPDF@pathawks.com
 
 
 == Changelog ==
+
+= 1.03 =
+* Automatically enable auto-embeds on plugin activation
 
 = 1.02 =
 * Added support for `gdoc` shortcode for compatibility with older plugins
