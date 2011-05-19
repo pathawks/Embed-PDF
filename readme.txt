@@ -3,7 +3,7 @@ Contributors: dirtysuds, pathawks
 Donate link: http://www.pathawks.com/p/wordpress-plugins.html
 Tags: plugins, wordpress, embed, eombed, pdf, google, Google Docs, shortcode
 Requires at least: 2.9
-Tested up to: 3.1
+Tested up to: 3.1.2
 Stable tag: 1.03
 
 Adds pseudo oembed support for PDF documents
