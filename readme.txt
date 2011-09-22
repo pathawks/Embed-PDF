@@ -1,7 +1,7 @@
 === Embed PDF ===
 Contributors: dirtysuds, pathawks
 Donate link: http://www.pathawks.com/p/wordpress-plugins.html
-Tags: plugins, wordpress, embed, eombed, pdf, google, Google Docs, shortcode
+Tags: WordPress,embed,google,media,plugin,plugins,Post,posts,simple,pdf,google,Google Docs
 Requires at least: 2.9
 Tested up to: 3.1.2
 Stable tag: 1.03
