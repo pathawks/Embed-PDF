@@ -25,10 +25,20 @@ Supported attributes in the embed tag are `class` `id` `title` `height` and `wid
 
 == Frequently Asked Questions ==
 
+= How can I change the size of the PDF viewer? =
+
+If you want to change the default size of media embedded in a post, that can be done in the admin interface under *Settings ⇒ Media Settings ⇒ Embeds*
+
+If you'd just like to change the size of one instance, you can use the standard attributes of the WordPress embed shortcode.
+
+   `[embed width="400" height="600"]http://example.com/document.pdf[/embed]`
+
+
 = I have an idea for a great way to improve this plugin =
 
 Great! I'd love to hear from you.
-embedPDF@pathawks.com
+
+plugins@dirtysuds.com
 
 
 == Changelog ==

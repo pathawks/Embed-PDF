@@ -6,6 +6,7 @@ Description: Embed a PDF using Google Docs Viewer
 Author: Dirty Suds
 Version: 1.03
 Author URI: http://blog.dirtysuds.com
+License: GPL2
 
 Updates:
 1.03 20110321 - Automatically enable auto-embeds on activation
@@ -34,7 +35,6 @@ Updates:
 register_activation_hook( __FILE__, 'dirtysuds_embed_pdf_enable_embeds' );
 wp_embed_register_handler( 'pdf', '#(^(http|wpurl)\:\/\/.+\.pdf$)#i', 'dirtysuds_embed_pdf' );
 add_shortcode( 'gdoc', 'dirtysuds_embed_pdf' );
-add_filter('plugin_row_meta', 'dirtysuds_embed_pdf_rate',10,2);
 
 function dirtysuds_embed_pdf_enable_embeds() {
 	update_option('embed_autourls',1);
@@ -50,8 +50,6 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		'class' => 'pdf',
 		'id' => '',
 	), $atts ) );
-
-	$url = str_replace('wpurl://',get_bloginfo('wpurl').'/',$url);
 	
 	if (!strstr($url,'http://') && strstr($atts,'http://')) {
 		$url = $atts;
@@ -66,20 +64,24 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		), $matches ) );
 	}
 
-	$embed = '<iframe src="http://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" style="height:'.$height.'px;width:'.$width.'px;" class="'.$class.'"';
+	$embed = '<iframe src="http://docs.google.com/givew?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
 	if ($id) {
 		$embed .= ' id="'.$id.'"';
 	}
 	if ($border) {
 		$embed .= ' frameborder="'.$border.'"';
+	} else {
+		$embed .= ' frameborder="0"';
 	}
 	if ($style) {
-		$embed .= ' style="'.$style.'"';
+		$embed .= ' style="height:'.$height.'px;width:'.$width.'px; '.$style.'"';
+	} else {
+		$embed .= ' style="height:'.$height.'px;width:'.$width.'px"';
 	}
 	if ($title) {
 		$embed .= ' title="'.$title.'"';
 	}
-	$embed .= '></iframe>';
+	$embed .= ' width="'.$width.'" height="'.$height.'"></iframe>';
 
 	return apply_filters( 'embed_pdf', $embed, $matches, $attr, $url, $rawattr  );
 }
@@ -90,3 +92,4 @@ function dirtysuds_embed_pdf_rate($links,$file) {
 		}
 	return $links;
 }
+add_filter('plugin_row_meta', 'dirtysuds_embed_pdf_rate',10,2);
