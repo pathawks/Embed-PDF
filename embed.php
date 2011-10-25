@@ -82,6 +82,14 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		$embed .= ' title="'.$title.'"';
 	}
 	$embed .= ' width="'.$width.'" height="'.$height.'"></iframe>';
+	
+	$embed  = '<![if !IE]>'.$embed.'<![endif]>';
+
+	$embed .= '<!--[if IE]>'.
+		'<object width="'.$width.'" height="'.$height.'" type="application/pdf" data="'.$url.'" id="pdf_content">'.
+		'<div style="width:'.$width.';height:'.$height.';text-align:center;background:#fff;color:#000;margin:0;border:0;padding:0">Unable to display PDF<br /><a href="'.$url.'">Click here to download</a></div>'.
+		'</object>'.
+		'<![endif]-->';	
 
 	return apply_filters( 'embed_pdf', $embed, $matches, $attr, $url, $rawattr  );
 }
