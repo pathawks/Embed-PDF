@@ -4,11 +4,12 @@ Plugin Name: DirtySuds - Embed PDF
 Plugin URI: http://dirtysuds.com
 Description: Embed a PDF using Google Docs Viewer
 Author: Dirty Suds
-Version: 1.03
+Version: 1.04
 Author URI: http://blog.dirtysuds.com
 License: GPL2
 
 Updates:
+1.04 20111125 - Automatically enable auto-embeds on activation
 1.03 20110321 - Automatically enable auto-embeds on activation
 1.02 20110315 - Added support for `gdoc` shortcode
 1.01 20110303 - Added support for class and ID attributes
@@ -44,7 +45,7 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	extract( shortcode_atts( array(
 		'height' => get_option('embed_size_h'),
 		'width' => get_option('embed_size_w'),
-		'border' => '',
+		'border' => '0',
 		'style' => '',
 		'title' => '',
 		'class' => 'pdf',
@@ -56,7 +57,7 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		extract( shortcode_atts( array(
 			'height' => get_option('embed_size_h'),
 			'width' => get_option('embed_size_w'),
-			'border' => '',
+			'border' => '0',
 			'style' => '',
 			'title' => '',
 			'class' => 'pdf',
@@ -64,19 +65,20 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		), $matches ) );
 	}
 
-	$embed = '<iframe src="http://docs.google.com/givew?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
+	$embed = '<iframe src="http://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
 	if ($id) {
 		$embed .= ' id="'.$id.'"';
 	}
-	if ($border) {
-		$embed .= ' frameborder="'.$border.'"';
-	} else {
-		$embed .= ' frameborder="0"';
+	
+	$embed .= ' frameborder="'.$border.'"';
+	if ($border != '0') {
+		$border .= 'px';
 	}
+	
 	if ($style) {
-		$embed .= ' style="height:'.$height.'px;width:'.$width.'px; '.$style.'"';
+		$embed .= ' style="height:'.$height.'px;width:'.$width.'px;border:'.$border.';'.$style.'"';
 	} else {
-		$embed .= ' style="height:'.$height.'px;width:'.$width.'px"';
+		$embed .= ' style="height:'.$height.'px;width:'.$width.'px;border:'.$border.'"';
 	}
 	if ($title) {
 		$embed .= ' title="'.$title.'"';
@@ -86,7 +88,13 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	$embed  = '<![if !IE]>'.$embed.'<![endif]>';
 
 	$embed .= '<!--[if IE]>'.
-		'<object width="'.$width.'" height="'.$height.'" type="application/pdf" data="'.$url.'" id="pdf_content">'.
+		'<object width="'.$width.'" height="'.$height.'" type="application/pdf" data="'.$url.'" class="'.$class.' ie"';
+
+	if ($id) {
+		$embed .= ' id="'.$id.'"';
+	}
+	
+	$embed .= '>'.
 		'<div style="width:'.$width.';height:'.$height.';text-align:center;background:#fff;color:#000;margin:0;border:0;padding:0">Unable to display PDF<br /><a href="'.$url.'">Click here to download</a></div>'.
 		'</object>'.
 		'<![endif]-->';	

@@ -43,6 +43,9 @@ plugins@dirtysuds.com
 
 == Changelog ==
 
+= 1.04 =
+* Changed URL for Google Docs Viewer to reflect change that Google made
+
 = 1.03 =
 * Automatically enable auto-embeds on plugin activation
 
@@ -55,3 +58,8 @@ plugins@dirtysuds.com
 = 1.00 =
 * First version
 * Works
+
+== Upgrade Notice ==
+
+= 1.04 =
+* Fixed problem with Google Docs viewer.  Upgrade immediately.
