@@ -1,21 +1,14 @@
 <?php
 /*
-Plugin Name: DirtySuds - Embed PDF
-Plugin URI: http://dirtysuds.com
+Plugin Name: Embed PDF
+Plugin URI: https://github.com/pathawks/Embed-PDF
 Description: Embed a PDF using Google Docs Viewer
-Author: Dirty Suds
-Version: 1.04
-Author URI: http://blog.dirtysuds.com
+Author: Pat Hawks
+Author URI: http://pathawks.com
 License: GPL2
+Version: 1.04
 
-Updates:
-1.04 20111125 - Automatically enable auto-embeds on activation
-1.03 20110321 - Automatically enable auto-embeds on activation
-1.02 20110315 - Added support for `gdoc` shortcode
-1.01 20110303 - Added support for class and ID attributes
-1.00 20110224 - First Version
-
-  Copyright 2011 Pat Hawks  (email : pat@pathawks.com)
+  Copyright 2014 Pat Hawks  (email : pat@pathawks.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,7 +44,7 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		'class' => 'pdf',
 		'id' => '',
 	), $atts ) );
-	
+
 	if (!strstr($url,'http://') && strstr($atts,'http://')) {
 		$url = $atts;
 		extract( shortcode_atts( array(
@@ -69,12 +62,12 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	if ($id) {
 		$embed .= ' id="'.$id.'"';
 	}
-	
+
 	$embed .= ' frameborder="'.$border.'"';
 	if ($border != '0') {
 		$border .= 'px';
 	}
-	
+
 	if ($style) {
 		$embed .= ' style="height:'.$height.'px;width:'.$width.'px;border:'.$border.';'.$style.'"';
 	} else {
@@ -84,7 +77,7 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		$embed .= ' title="'.$title.'"';
 	}
 	$embed .= ' width="'.$width.'" height="'.$height.'"></iframe>';
-	
+
 	$embed  = '<![if !IE]>'.$embed.'<![endif]>';
 
 	$embed .= '<!--[if IE]>'.
@@ -93,11 +86,11 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 	if ($id) {
 		$embed .= ' id="'.$id.'"';
 	}
-	
+
 	$embed .= '>'.
 		'<div style="width:'.$width.';height:'.$height.';text-align:center;background:#fff;color:#000;margin:0;border:0;padding:0">Unable to display PDF<br /><a href="'.$url.'">Click here to download</a></div>'.
 		'</object>'.
-		'<![endif]-->';	
+		'<![endif]-->';
 
 	return apply_filters( 'embed_pdf', $embed, $matches, $attr, $url, $rawattr  );
 }

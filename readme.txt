@@ -1,6 +1,6 @@
 === Embed PDF ===
-Contributors: dirtysuds, pathawks
-Donate link: http://www.pathawks.com/p/wordpress-plugins.html
+Contributors: pathawks,dirtysuds
+Donate link: https://github.com/pathawks/Embed-PDF
 Tags: WordPress,embed,google,media,plugin,plugins,Post,posts,simple,pdf,google,Google Docs
 Requires at least: 2.9
 Tested up to: 3.1.2
