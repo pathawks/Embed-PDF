@@ -7,7 +7,7 @@ Author: Pat Hawks
 Author URI: http://pathawks.com
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Version: 1.04
+Version: 1.05
 
   Copyright 2014 Pat Hawks  (email : pat@pathawks.com)
 
@@ -59,7 +59,11 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		), $matches ) );
 	}
 
-	$embed = '<iframe src="http://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
+	if (is_ssl()) {
+		$embed = '<iframe src="https://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
+	} else {
+		$embed = '<iframe src="http://docs.google.com/viewer?url='.urlencode($url).'&amp;embedded=true" class="'.$class.'"';
+	}
 	if ($id) {
 		$embed .= ' id="'.$id.'"';
 	}
