@@ -6,7 +6,7 @@ License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 2.9
 Tested up to: 3.9.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 Adds pseudo oembed support for PDF documents
 
@@ -45,6 +45,9 @@ plugins@dirtysuds.com
 
 == Changelog ==
 
+= 1.06 =
+* Bugfix
+
 = 1.04 =
 * Changed URL for Google Docs Viewer to reflect change that Google made
 
@@ -62,6 +65,9 @@ plugins@dirtysuds.com
 * Works
 
 == Upgrade Notice ==
+
+= 1.06 =
+* Important bugfix
 
 = 1.04 =
 * Fixed problem with Google Docs viewer.  Upgrade immediately.
