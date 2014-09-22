@@ -97,7 +97,7 @@ function dirtysuds_embed_pdf( $matches, $atts, $url, $rawattr=null ) {
 		'</object>'.
 		'<![endif]-->';
 
-	return apply_filters( 'embed_pdf', $embed, $matches, $attr, $url, $rawattr  );
+	return apply_filters( 'embed_pdf', $embed, $matches, $atts, $url, $rawattr  );
 }
 
 function dirtysuds_embed_pdf_rate($links,$file) {
